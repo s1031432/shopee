@@ -48,8 +48,11 @@ function getRating(itemid, shopid, ratingOffset){
             else if(res.statusCode==200){
                 //console.log(body);
                 ratingOffset+=5;
-                for(var i=0;i<body.data.ratings.length;i++)
+                for(var i=0;i<body.data.ratings.length;i++){
+                    // vvvvvvvvvv you can write write file(comment) code to replace console vvvvvvvvvv
                     console.log("\x1b[33m", parseInt(ratingOffset+i-4)+"/"+body.data.item_rating_summary.rating_total, "\x1b[0m\x1b[33m", body.data.ratings[i].rating_star+"\x1b[0m星", body.data.ratings[i].comment);
+                    // ^^^^^^^^^^ you can write write file(comment) code to replace console ^^^^^^^^^^
+                }
                 ratingTotal = body.data.item_rating_summary.rating_total;
                 if(ratingTotal <= ratingOffset){
                     keywordOffset++;    // conitue next item
@@ -64,12 +67,14 @@ function getRating(itemid, shopid, ratingOffset){
 var keywordOffset=0;
 function main(){
     // put keyword vvvvvvv
-    var keyword = "Canon 50mm";
+    var keyword = "針織上衣";
     // put keyword ^^^^^^^
     getId(keyword, keywordOffset)
     .then(function (fullfilled){
         ratingTotal=-1;
+        // vvvvvvvvvv you can write write file(title) code to replace console vvvvvvvvvv
         console.log("      --以下為  ", "\x1b[33m", fullfilled.items[0].name+"\x1b[0m", "  的評論--");
+        // ^^^^^^^^^^ you can write write file(title) code to replace console ^^^^^^^^^^
         getRating(fullfilled.items[0].itemid, fullfilled.items[0].shopid, 0)
         .then(function(fullfilled){
 
